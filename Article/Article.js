@@ -173,6 +173,10 @@ class Articles{
 }
 
 const articles = document.querySelector('.articles');
-const firstArticle = new Articles(data[0]);
-//console.log(firstArticle.completedElement());
-articles.appendChild(firstArticle.completedElement());
+data.forEach(input => {
+  let article = new Articles(input);
+  articles.appendChild(article.completedElement());
+})
+// const firstArticle = new Articles(data[0]);
+// //console.log(firstArticle.completedElement());
+// articles.appendChild(firstArticle.completedElement());
