@@ -112,3 +112,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+class Articles{
+  constructor(input){
+    //this.article = article;
+    this.article;
+    this.title = input.title;
+    this.date = input.date;
+    this.para1 = input.firstParagraph;
+    this.para2 = input.secondParagraph;
+    this.para3 = input.thirdParagraph;
+    this.expand;
+
+    this.createArticle();
+  }
+
+  createArticle(){
+    let articleContainer = document.createElement('div');
+    articleContainer.classList.add('article');
+
+    let newTitle = document.createElement('h2');
+    newTitle.textContent = this.title;
+
+    articleContainer.appendChild(newTitle);
+
+    let dateContent = document.createElement('p');
+    dateContent.classList.add('date');
+    dateContent.textContent = this.date;
+
+    articleContainer.appendChild(dateContent);
+
+    articleContainer.appendChild(this.createParagraphs(this.para1));
+    articleContainer.appendChild(this.createParagraphs(this.para2));
+    articleContainer.appendChild(this.createParagraphs(this.para3));
+
+    let button = document.createElement('span');
+    button.classList.add('expandButton');
+
+    articleContainer.appendChild(button);
+
+    this.article = articleContainer;
+  }
+
+  createParagraphs(content){
+    let para = document.createElement('p');
+    para.textContent = content;
+
+    return para;
+  }
+
+  completedElement(){
+    return this.article;
+  }
+}
+
+const articles = document.querySelector('.articles');
+const firstArticle = new Articles(data[0]);
+console.log(firstArticle.completedElement());
+articles.appendChild(firstArticle.completedElement());
