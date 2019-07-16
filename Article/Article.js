@@ -116,15 +116,15 @@ const data = [
 class Articles{
   constructor(input){
     //this.article = article;
-    this.article;
+    this.article = document.querySelector('.article');
     this.title = input.title;
     this.date = input.date;
     this.para1 = input.firstParagraph;
     this.para2 = input.secondParagraph;
     this.para3 = input.thirdParagraph;
-    this.expand;
 
     this.createArticle();
+    this.article.addEventListener('click', this.toggleArticle.bind(this));
   }
 
   createArticle(){
@@ -161,6 +161,12 @@ class Articles{
     return para;
   }
 
+  toggleArticle(){
+    //console.log(this.article);
+    // let article = document.querySelector('.article');
+    this.article.classList.toggle('article-open');
+  }
+
   completedElement(){
     return this.article;
   }
@@ -168,5 +174,5 @@ class Articles{
 
 const articles = document.querySelector('.articles');
 const firstArticle = new Articles(data[0]);
-console.log(firstArticle.completedElement());
+//console.log(firstArticle.completedElement());
 articles.appendChild(firstArticle.completedElement());
