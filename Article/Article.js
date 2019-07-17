@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Articleg',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -112,3 +128,87 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+class Articles{
+  constructor(input){
+    //this.article = article;
+    this.article = document.querySelector('.article');
+    this.title = input.title;
+    this.date = input.date;
+    this.para1 = input.firstParagraph;
+    this.para2 = input.secondParagraph;
+    this.para3 = input.thirdParagraph;
+
+    this.createArticle();
+    this.article.addEventListener('click', this.toggleArticle.bind(this));
+  }
+
+  createArticle(){
+    let articleContainer = document.createElement('div');
+    articleContainer.classList.add('article');
+
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent = 'X';
+    deleteButton.addEventListener('click', this.deleteArticle.bind(this));
+
+    articleContainer.appendChild(deleteButton);
+
+    let newTitle = document.createElement('h2');
+    newTitle.textContent = this.title;
+
+    articleContainer.appendChild(newTitle);
+
+    let dateContent = document.createElement('p');
+    dateContent.classList.add('date');
+    dateContent.textContent = this.date;
+
+    articleContainer.appendChild(dateContent);
+
+    articleContainer.appendChild(this.createParagraphs(this.para1));
+    articleContainer.appendChild(this.createParagraphs(this.para2));
+    articleContainer.appendChild(this.createParagraphs(this.para3));
+
+    let button = document.createElement('span');
+    button.classList.add('expandButton');
+
+    articleContainer.appendChild(button);
+
+    this.article = articleContainer;
+  }
+
+  createParagraphs(content){
+    let para = document.createElement('p');
+    para.textContent = content;
+
+    return para;
+  }
+
+  toggleArticle(){
+    //console.log(this.article);
+    // let article = document.querySelector('.article');
+    if(this.article.classList.contains('article-open')){
+      TweenMax.to(this.article, 1, {className: '-=article-open'});
+    }else{
+      TweenMax.to(this.article, 1, {className: '+=article-open'});
+    }
+    //this.article.classList.toggle('article-open');
+  }
+
+  deleteArticle(){
+    let articleCollection = document.querySelector('.articles');
+    articleCollection.removeChild(this.article);
+  }
+
+  completedElement(){
+    return this.article;
+  }
+}
+
+const articles = document.querySelector('.articles');
+data.forEach(input => {
+  let article = new Articles(input);
+  articles.appendChild(article.completedElement());
+})
+// const firstArticle = new Articles(data[0]);
+// //console.log(firstArticle.completedElement());
+// articles.appendChild(firstArticle.completedElement());
