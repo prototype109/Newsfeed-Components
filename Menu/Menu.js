@@ -56,5 +56,11 @@ header.appendChild(createMenu(menuItems));
 let menuButton = document.querySelector('.menu-button');
 menuButton.addEventListener('click', () => {
   let theMenu = document.querySelector('.menu');
-  theMenu.classList.toggle('menu--open');
+  theMenu.style.opacity = '0';
+  if(theMenu.classList.contains('menu--open')){
+    TweenMax.to(theMenu, 1, {className: '-=menu--open', opacity: '0'});
+  }else{
+    TweenMax.to(theMenu, 1, {className: '+=menu--open', opacity: '1'});
+  }
+  //theMenu.classList.toggle('menu--open');
 })
