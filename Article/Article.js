@@ -180,7 +180,12 @@ class Articles{
   toggleArticle(){
     //console.log(this.article);
     // let article = document.querySelector('.article');
-    this.article.classList.toggle('article-open');
+    if(this.article.classList.contains('article-open')){
+      TweenMax.to(this.article, 1, {className: '-=article-open'});
+    }else{
+      TweenMax.to(this.article, 1, {className: '+=article-open'});
+    }
+    //this.article.classList.toggle('article-open');
   }
 
   completedElement(){
