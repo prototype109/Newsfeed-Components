@@ -147,6 +147,12 @@ class Articles{
     let articleContainer = document.createElement('div');
     articleContainer.classList.add('article');
 
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent = 'X';
+    deleteButton.addEventListener('click', this.deleteArticle.bind(this));
+
+    articleContainer.appendChild(deleteButton);
+
     let newTitle = document.createElement('h2');
     newTitle.textContent = this.title;
 
@@ -186,6 +192,11 @@ class Articles{
       TweenMax.to(this.article, 1, {className: '+=article-open'});
     }
     //this.article.classList.toggle('article-open');
+  }
+
+  deleteArticle(){
+    let articleCollection = document.querySelector('.articles');
+    articleCollection.removeChild(this.article);
   }
 
   completedElement(){
